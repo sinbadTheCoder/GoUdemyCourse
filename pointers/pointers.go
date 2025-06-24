@@ -21,11 +21,14 @@ func main() {
 	fmt.Printf("Value of pointer to int variable is [%d] at address [%d]\n", *agePtr, agePtr)
 
 	fmt.Println("Age: ", *agePtr)
-	adultYears := getAdultYears(agePtr)
-	fmt.Println(adultYears)
+
+	editAgeToAdultYears(agePtr)
+	fmt.Println(age)
 }
 
-func getAdultYears(age *int) int {
+func editAgeToAdultYears(age *int) {
 	fmt.Printf("Value of pointer to int variable is [%d] at address [%d]\n", *age, age)
-	return *age - 18
+	//calculate new age and store back into pointer given to function
+	*age = *age - 18
+	//no return value as value is written back to memory directly
 }
