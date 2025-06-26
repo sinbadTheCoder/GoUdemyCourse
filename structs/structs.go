@@ -12,6 +12,11 @@ type user struct {
 	createdAt time.Time
 }
 
+func (u user) outputUserDetails() {
+	//shows shorthand to dereference pointers to structures
+	fmt.Println(u.firstName, u.lastName, u.birthdate, u.createdAt)
+}
+
 func main() {
 	userFirstName := getUserData("Please enter your first name: ")
 	userLastName := getUserData("Please enter your last name: ")
@@ -24,12 +29,7 @@ func main() {
 		createdAt: time.Now(),
 	}
 
-	outputUserDetails(&appUser)
-}
-
-func outputUserDetails(userData *user) {
-	//shows shorthand to dereference pointers to structures
-	fmt.Println((*userData).firstName, userData.lastName, userData.birthdate, userData.createdAt)
+	appUser.outputUserDetails()
 }
 
 func getUserData(promptText string) string {
