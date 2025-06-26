@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"reflect"
 	"time"
 )
 
@@ -10,6 +11,15 @@ type user struct {
 	lastName  string
 	birthdate string
 	createdAt time.Time
+}
+
+func newUser(first, last, birthdate string) *user {
+	return &user{
+		firstName: first,
+		lastName:  last,
+		birthdate: birthdate,
+		createdAt: time.Now(),
+	}
 }
 
 func (u user) outputUserDetails() {
@@ -28,12 +38,11 @@ func main() {
 	userLastName := getUserData("Please enter your last name: ")
 	userBirthdate := getUserData("Please enter your (MM/DD/YYYY): ")
 
-	var appUser = user{
-		firstName: userFirstName,
-		lastName:  userLastName,
-		birthdate: userBirthdate,
-		createdAt: time.Now(),
-	}
+	var appUser = *newUser(userFirstName, userLastName, userBirthdate)
+	fmt.Printf("appUser is of type [%s]\n", reflect.ValueOf(appUser).Kind())
+
+	var appUser2 = newUser(userFirstName, userLastName, userBirthdate)
+	fmt.Printf("appUser2 is of type [%s]\n", reflect.ValueOf(appUser2).Kind())
 
 	appUser.outputUserDetails()
 	appUser.clearUserName()
