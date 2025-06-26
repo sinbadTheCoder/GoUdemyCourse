@@ -17,21 +17,19 @@ func main() {
 	userLastName := getUserData("Please enter your last name: ")
 	userBirthdate := getUserData("Please enter your (MM/DD/YYYY): ")
 
-	var appUser user
-	appUser = user{}
-
-	appUser = user{
+	var appUser = user{
 		firstName: userFirstName,
 		lastName:  userLastName,
 		birthdate: userBirthdate,
 		createdAt: time.Now(),
 	}
 
-	outputUserDetails(appUser)
+	outputUserDetails(&appUser)
 }
 
-func outputUserDetails(userData user) {
-	fmt.Println(userData.firstName, userData.lastName, userData.birthdate, userData.createdAt)
+func outputUserDetails(userData *user) {
+	//shows shorthand to dereference pointers to structures
+	fmt.Println((*userData).firstName, userData.lastName, userData.birthdate, userData.createdAt)
 }
 
 func getUserData(promptText string) string {
