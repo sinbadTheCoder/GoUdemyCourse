@@ -19,7 +19,7 @@ func (u user) outputUserDetails() {
 
 // modifying the value of a struct requires pointer here
 func (u *user) clearUserName() {
-	u.firstName = ""
+	(*u).firstName = ""
 	u.lastName = ""
 }
 
