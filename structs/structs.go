@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"reflect"
 	"time"
@@ -13,13 +14,18 @@ type user struct {
 	createdAt time.Time
 }
 
-func newUser(first, last, birthdate string) *user {
-	return &user{
+func newUser(first, last, birthdate string) (*user, error) {
+	if first == "" || last == "" || birthdate == "" {
+		return nil, errors.New("invalid data entered")
+	}
+
+	var u = &user{
 		firstName: first,
 		lastName:  last,
 		birthdate: birthdate,
 		createdAt: time.Now(),
 	}
+	return u, nil
 }
 
 func (u user) outputUserDetails() {
@@ -38,10 +44,20 @@ func main() {
 	userLastName := getUserData("Please enter your last name: ")
 	userBirthdate := getUserData("Please enter your (MM/DD/YYYY): ")
 
-	var appUser = *newUser(userFirstName, userLastName, userBirthdate)
+	var appUser *user
+	var err error
+	appUser, err = newUser(userFirstName, userLastName, userBirthdate)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 	fmt.Printf("appUser is of type [%s]\n", reflect.ValueOf(appUser).Kind())
 
-	var appUser2 = newUser(userFirstName, userLastName, userBirthdate)
+	appUser2, _ := newUser(userFirstName, userLastName, userBirthdate)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 	fmt.Printf("appUser2 is of type [%s]\n", reflect.ValueOf(appUser2).Kind())
 
 	appUser.outputUserDetails()
@@ -52,6 +68,6 @@ func main() {
 func getUserData(promptText string) string {
 	fmt.Println(promptText)
 	var value string
-	fmt.Scan(&value)
+	fmt.Scanln(&value)
 	return value
 }
