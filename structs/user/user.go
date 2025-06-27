@@ -13,6 +13,25 @@ type User struct {
 	createdAt time.Time
 }
 
+type Admin struct {
+	email    string
+	password string
+	User
+}
+
+func NewAdmin(email, password string) Admin {
+	return Admin{
+		email:    email,
+		password: password,
+		User: User{
+			firstName: "Admin",
+			lastName:  "ADMIN",
+			birthdate: "---",
+			createdAt: time.Now(),
+		},
+	}
+}
+
 func New(first, last, birthdate string) (*User, error) {
 	if first == "" || last == "" || birthdate == "" {
 		return nil, errors.New("invalid data entered")
