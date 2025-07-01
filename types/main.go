@@ -24,6 +24,14 @@ func main() {
 	convertAnyToInt(3.14)
 	convertAnyToInt("fourty-two")
 	convertAnyToInt("42")
+
+	result := add(42, 18)
+	fmt.Println("sum of 42 and 18 is ", result)
+}
+
+// use generics to implement add function
+func add[T int | float64 | string](a, b T) T {
+	return a + b
 }
 
 func printAnything(value any) {
