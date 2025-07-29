@@ -96,4 +96,11 @@ func slicesBasics() {
 	//replace element of orig array by modifying slice (increasing by 1 dollar)
 	highlightedPrices[0] += 1
 	fmt.Println("Modified price:", prices[1])
+
+	// Merge two slices together
+	fmt.Println(prices)
+	pricesSlice := prices[:]
+	newlyDefinedPrices := []float64{9.99, 10.99, 11.99}
+	pricesSlice = append(pricesSlice, newlyDefinedPrices...)
+	fmt.Println("Merged list of prices:", pricesSlice)
 }
