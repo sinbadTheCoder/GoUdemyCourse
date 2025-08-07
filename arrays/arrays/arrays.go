@@ -1,4 +1,4 @@
-package main
+package arrays
 
 import (
 	"fmt"
@@ -62,7 +62,7 @@ func listCourses() {
 
 }
 
-func main() {
+func Main() {
 	listCourses()
 	slicesBasics()
 }
